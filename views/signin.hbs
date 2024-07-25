@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/formStyle.css" rel="stylesheet">
+    <title>Sign in</title>
+</head>
+<body>
+    <div class="box">
+        <h1>Sign in</h1><br>
+        <div class="input-box">
+            <form action="/auth/signin" method="post">
+                <input class="inputs" type="text" name="username" placeholder="Username" required><br>
+                <input class="inputs" type="password" name="password" placeholder="Password" required><br>
+                {{#if signin_msg}}
+                    <span class="error">{{signin_msg}}</span><br>
+                {{/if}}
+                {{#if signin_error_msg}}
+                    <span class="error">{{signin_error_msg}}</span><br>
+                {{/if}}
+                <input id="btn" type="submit" name="insert" value="Submit">
+            </form>
+        </div>
+        <a href="/signup-page">Don't have an account? click here</a>
+    </div>
+</body>
+</html>

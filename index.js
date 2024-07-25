@@ -1,13 +1,15 @@
 const express = require('express');
-//const body_parser = require('body-parser');
 const mysql = require('mysql2');
+const dotenv = require('dotenv')
+
+dotenv.config({path: './.env'});
 
 //Database connection and error handling
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '3412909matin',
-    database: 'accounts'
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
+    database: process.env.DATABASE
 });
 db.connect((error) => {
     if(error) {
@@ -27,16 +29,9 @@ app.set('view engine', 'hbs');
 
 //Routes
 app.use('/', require('./routes/pages'));
+app.use('/signup-page', require('./routes/pages'));
+app.use('/signin-page', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
-
-// app.get('/', (req, res) => {
-//     res.render('signup')
-// });
-
-// app.get('/signup', (req, res) => {
-//     const {username, password, rpassword} = req.body
-//     db.query('SELECT username FROM users WHERE username = ?', [username], (error, ress))
-// });
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

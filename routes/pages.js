@@ -2,7 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('mainpage');
+    try{
+        let username = req.cookies.username;
+        res.render('mainpage', {
+            username: username
+        });
+    }
+    catch(error){
+        res.render('mainpage');
+    }
 });
 
 router.get('/signup-page', (req, res) => {

@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const dotenv = require('dotenv')
+const cookie_parser = require('cookie-parser');
 
 dotenv.config({path: './.env'});
 
@@ -25,6 +26,7 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.static('public'));
+app.use(cookie_parser());
 app.set('view engine', 'hbs');
 
 //Routes

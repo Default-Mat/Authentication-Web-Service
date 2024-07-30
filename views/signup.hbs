@@ -13,14 +13,8 @@
                     <!-- <span class="error"></span><br> -->
                     <input class="inputs" id="pass" type="password" name="password" placeholder="Password">
                     <input class="inputs" id="rpass" type="password" name="rpassword" placeholder="Repeat Password"><br>
-                    {{#if username_error_msg}}
-                        <span class="error">{{username_error_msg}}</span><br>
-                    {{/if}}
-                    {{#if password_error_msg}}
-                        <span class="error">{{password_error_msg}}</span><br>
-                    {{/if}}
-                    {{#if signedup_msg}}
-                        <span class="error">{{signedup_msg}}</span><br>
+                    {{#if error_message}}
+                        <span class="error">{{error_message}}</span><br>
                     {{/if}}
                     <input id="btn" type="submit" name="insert" value="Submit">
                 </form>

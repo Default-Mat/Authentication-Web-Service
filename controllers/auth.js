@@ -19,18 +19,18 @@ exports.signup = (req, res) => {
         if(select_results.length > 0) {
             console.log('repeated username');
             return res.render('signup', {
-                username_error_msg: 'The username ' + username + ' is already taken'
+                error_message: 'The username ' + username + ' is already taken'
             });
         }
 
         else if(password !== rpassword) {
             console.log('repeated password');
             return res.render('signup', {
-                password_error_msg: 'The repeated password is not the same'
+                error_message: 'The repeated password is not the same'
             });
         }
 
-        //If everything is in order, put the info in database
+        //If everything is in order, send the info to database
         else {
             db.query('INSERT INTO users(username, password) VALUES (?, ?)', [username, password], (insert_error, insert_results) => {
                 if(insert_error) {
@@ -38,8 +38,8 @@ exports.signup = (req, res) => {
                 }
                 else {
                     console.log(insert_results);
-                    return res.render('signup', {
-                        signedup_msg: 'You signed up successfully'
+                    return res.render('signin', {
+                        signedup_message: 'You signed up successfully'
                     });
                 }
             });
@@ -55,15 +55,21 @@ exports.signin = (req, res) => {
         }
 
         if(result.length > 0) {
-            res.render('signin', {
-                signin_msg: 'You signed in successfully'
+            res.cookie('username', username);
+            res.render('mainpage', {
+                username: username
             });
         }
 
         else{
             res.render('signin', {
-                signin_error_msg: 'The entered username or password is incorrect'
+                error_message: 'The entered username or password is incorrect'
             });
         }
     });
+}
+
+exports.signout = (req, res) => {
+    res.clearCookie('username');
+    res.render('mainpage');
 }

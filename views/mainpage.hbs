@@ -31,8 +31,16 @@
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                        <li id="userlist" class="nav-item">
-                            <a id="signin" class="nav-link" href="/signin-page">Sign in</a>
+                        <li id="userlist" class="nav-item dropdown">
+                            {{#if username}}
+                                <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown'>{{username}}</a>
+                                    <ul class='dropdown-menu'>
+                                        <li><a class='dropdown-item' href='#'>Profile</a></li>
+                                        <li><a class='dropdown-item' href='/auth/signout'>sign out</a></li>
+                                    </ul>
+                            {{else}}
+                                <a id="signin" class="nav-link" href="/signin-page">Sign in</a>
+                            {{/if}}
                         </li>
                     </ul>
                     
